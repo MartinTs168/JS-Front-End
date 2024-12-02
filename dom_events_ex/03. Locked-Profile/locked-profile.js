@@ -1,30 +1,27 @@
 document.addEventListener('DOMContentLoaded', solve);
 
 function solve() {
-    const profiles = document.querySelectorAll('.profile');
+    const mainBody = document.querySelector('main');
 
     function showHiddenInfo(event) {
-        event.preventDefault();
         console.log('tag is ' + event.target.tagName);
-        if (
-            event.target``.tagName != 'BUTTON' &&
-            event.target.tagName != 'INPUT'
-        ) {
+        if (event.target.tagName != 'BUTTON') {
             return;
         }
+        event.preventDefault();
 
         const radioLockedEl =
             event.target.parentElement.querySelector('.radio-group')
                 .children[1];
         console.log(radioLockedEl.checked);
+        const hiddenInfo =
+            event.target.parentElement.querySelector('.hidden-fields');
         if (!radioLockedEl.checked) {
-            const hiddenInfo =
-                event.target.parentElement.querySelector('.hidden-fields');
             hiddenInfo.classList.remove('active');
+        } else {
+            hiddenInfo.classList.add('active');
         }
     }
 
-    profiles.forEach((profile) => {
-        profile.addEventListener('click', showHiddenInfo);
-    });
+    mainBody.addEventListener('click', showHiddenInfo);
 }
